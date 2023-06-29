@@ -33,17 +33,22 @@ class LoginForm extends Component {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
+    console.log(userDetails)
+    const url = 'https://ashokauthentication.onrender.com/login/'
+    // const url = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
     }
     const response = await fetch(url, options)
+    // console.log(response)
     const data = await response.json()
     console.log(data)
-    if (response.ok === true) {
+    if (response.status === 200) {
+      // console.log(123)
       this.onSuccessView(data.jwt_token)
     } else {
+      // console.log('ashok')
       this.onFailureView(data.error_msg)
     }
   }
